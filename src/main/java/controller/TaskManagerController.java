@@ -106,10 +106,19 @@ public class TaskManagerController {
         return false;
     }
     // metoda usuwająca użytkownka po id wraz z jego powiązaniami w tabelce user_role
-    public void deleteUserByIdRecursively(){
+    public void deleteUserByIdRecursively(int user_id) throws SQLException {
         // 1. Usunięcie wszystkich powiązań z user_id w tabelce user_role
+        PreparedStatement ps_role = connection.prepareStatement("DELETE FROM user_role WHERE user_id = ?");
+        ps_role.setInt(1, user_id);
+        ps_role.executeUpdate();
         // 2. Usunięcie użytkownika po user_id
+        PreparedStatement ps_user = connection.prepareStatement("DELETE FROM tm_user WHERE user_id = ?");
+        ps_user.setInt(1, user_id);
+        ps_user.executeUpdate();
     }
-
-
 }
+
+
+
+
+
