@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter             // automatycznie dodaje gettery do wszystkich pól klasowych
 @Setter             // automatycznie dodaje settery do wszystkich pól klasowych
 @ToString           // automatycznie dodaje metodę toString
+@AllArgsConstructor // automatycznie dodaje kontruktor, który przyjmuje w argumentach wszystkie pola
 public class User {
     private int userId;
     private String userName;
