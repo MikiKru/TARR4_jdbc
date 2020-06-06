@@ -21,7 +21,7 @@ public class TaskManagerController {
         // obiekt na którym interpretowane będzie polecenie w składni MySQL
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("SELECT * FROM tm_user");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         List<User> users = new ArrayList<>();
         while (resultSet.next()){
             users.add(new User(
