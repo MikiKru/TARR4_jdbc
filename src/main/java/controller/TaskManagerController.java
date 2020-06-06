@@ -71,7 +71,6 @@ public class TaskManagerController {
     }
     // metoda wprowadzająca nowy rekord do tabelki tm_user
     public void saveUser(String name, String lastName, String email, String password) throws SQLException {
-        User userToInsert = new User(name,lastName,email,password);
         PreparedStatement ps = connection.prepareStatement(
                 "insert into tm_user values (default, ?, ?, ?, ?, default, default);"
         );
@@ -80,6 +79,18 @@ public class TaskManagerController {
         ps.setString(3,email);
         ps.setString(4,password);
         ps.executeUpdate();         // dla poleceń typu insert, update, delete, create, drop, alter
+    }
+    // metoda do zmiany hasła użytkownika
+    public boolean updateUserPasswordById(int userId, String newPassword) throws SQLException {
+        if(getUserById(userId) != null){
+            PreparedStatement ps = connection.prepareStatement(
+                    "UPDATE tm_user SET user_password = ? WHERE user_id = ?");
+            ps.setString(1, newPassword);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+            return true;
+        }
+        return false;
     }
 
 }
