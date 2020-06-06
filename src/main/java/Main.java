@@ -15,6 +15,8 @@ public class Main {
         tmc.printContent(tmc.getAllRoles());
         System.out.println(tmc.getUserById(1));
         System.out.println(tmc.getUserById(10));
+        tmc.saveUser("Anna","Nowak", "an@an.pl", "an");
+        tmc.printContent(tmc.getAllUsers());
 
         mySQLDBConnector.closeConnection(connection);
 

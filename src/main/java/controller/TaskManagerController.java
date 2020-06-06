@@ -65,10 +65,21 @@ public class TaskManagerController {
         }
         return null;
     }
-
-
     // metoda wypisująca zawartość listy
     public void printContent(List list){
         list.forEach(System.out::println);
     }
+    // metoda wprowadzająca nowy rekord do tabelki tm_user
+    public void saveUser(String name, String lastName, String email, String password) throws SQLException {
+        User userToInsert = new User(name,lastName,email,password);
+        PreparedStatement ps = connection.prepareStatement(
+                "insert into tm_user values (default, ?, ?, ?, ?, default, default);"
+        );
+        ps.setString(1, name);
+        ps.setString(2,lastName);
+        ps.setString(3,email);
+        ps.setString(4,password);
+        ps.executeUpdate();         // dla poleceń typu insert, update, delete, create, drop, alter
+    }
+
 }
