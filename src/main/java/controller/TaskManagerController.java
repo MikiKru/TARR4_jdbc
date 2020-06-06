@@ -105,6 +105,11 @@ public class TaskManagerController {
         }
         return false;
     }
+    // metoda usuwająca użytkownka po id wraz z jego powiązaniami w tabelce user_role
+    public void deleteUserByIdRecursively(){
+        // 1. Usunięcie wszystkich powiązań z user_id w tabelce user_role
+        // 2. Usunięcie użytkownika po user_id
+    }
 
 
 }
