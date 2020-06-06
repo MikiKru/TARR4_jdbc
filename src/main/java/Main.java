@@ -20,7 +20,7 @@ public class Main {
         System.out.println("Zmieniono hasło: " + tmc.updateUserPasswordById(1,"yy"));
         System.out.println("Zmieniono hasło: " + tmc.updateUserPasswordById(10,"xxx"));
         tmc.deleteUserByIdRecursively(3);
-
+        tmc.getAllUsersWithRoles();
         mySQLDBConnector.closeConnection(connection);
 
     }

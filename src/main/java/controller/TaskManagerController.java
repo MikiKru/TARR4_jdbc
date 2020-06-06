@@ -116,6 +116,20 @@ public class TaskManagerController {
         ps_user.setInt(1, user_id);
         ps_user.executeUpdate();
     }
+    public void getAllUsersWithRoles() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "SELECT u.user_email, u.user_registration, u.user_status, r.role_name " +
+                        "FROM tm_user u join  user_role ur on (u.user_id = ur.user_id) " +
+                        "join tm_role r on (r.role_id = ur.role_id) " +
+                        "order by u.user_registration;");
+        while (resultSet.next()){
+            System.out.printf("| %15s | %20s | %5s | %10s |\n",
+                    resultSet.getString(1), resultSet.getString(2),
+                    resultSet.getBoolean(3), resultSet.getString(4)
+                    );
+        }
+    }
 }
 
 
