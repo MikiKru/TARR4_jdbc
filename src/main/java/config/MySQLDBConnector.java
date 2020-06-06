@@ -15,9 +15,15 @@ public class MySQLDBConnector {
     }
     public Connection setConnection(){
         try {
-            return DriverManager.getConnection("?","?","?");
+            String url = "jdbc:mysql://localhost:3306/task_manager" +
+                    "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            String user = "tm_user";
+            String password = "qwe123";
+            Connection connection = DriverManager.getConnection(url,user,password);
+            System.out.println("Ustanowiono połączenie z bazą danych");
+            return connection;
         } catch (SQLException e) {
-            System.out.println("Błą połączenia z baza danych");
+            System.out.println("Błąd połączenia z baza danych");
             e.printStackTrace();
             return null;
         }
