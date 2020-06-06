@@ -34,6 +34,11 @@ select * from tm_user;
 select * from tm_role;
 select * from user_role;
 
+# Utworzenie nowego użytkownika na serwerze DB i przypisanie mu uprawnień
+CREATE USER 'tm_user'@'localhost' IDENTIFIED BY 'qwe123';
+GRANT SELECT, INSERT, UPDATE, DELETE ON task_manager.* TO 'tm_user'@'localhost';
+
+
 
 
 
