@@ -28,4 +28,19 @@ public class MySQLDBConnector {
             return null;
         }
     }
+    public void closeConnection(Connection connection){
+        try {
+            connection.close();
+            System.out.println("Zamknięto połączenie z bazą danych");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+
+
+
+

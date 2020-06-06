@@ -7,6 +7,8 @@ public class Main {
         MySQLDBConnector mySQLDBConnector = new MySQLDBConnector();
         mySQLDBConnector.javaConnectorTest();
         Connection connection = mySQLDBConnector.setConnection();
+        // ???
+        mySQLDBConnector.closeConnection(connection);
 
     }
 }
