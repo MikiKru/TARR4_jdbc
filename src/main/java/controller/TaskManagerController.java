@@ -79,6 +79,19 @@ public class TaskManagerController {
         ps.setString(3,email);
         ps.setString(4,password);
         ps.executeUpdate();         // dla poleceń typu insert, update, delete, create, drop, alter
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(
+                "SELECT user_id FROM tm_user ORDER BY user_registration DESC LIMIT 1");
+        if(resultSet.next()) {
+            addRoleToUser(resultSet.getInt("user_id"), 2);
+        }
+    }
+    public void addRoleToUser(int userId, int roleId) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "INSERT INTO user_role VALUES (?, ?)");
+        ps.setInt(1, userId);
+        ps.setInt(2, roleId);
+        ps.executeUpdate();
     }
     // metoda do zmiany hasła użytkownika
     public boolean updateUserPasswordById(int userId, String newPassword) throws SQLException {
@@ -92,5 +105,6 @@ public class TaskManagerController {
         }
         return false;
     }
+
 
 }

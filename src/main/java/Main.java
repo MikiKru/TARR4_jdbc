@@ -15,9 +15,9 @@ public class Main {
         tmc.printContent(tmc.getAllRoles());
         System.out.println(tmc.getUserById(1));
         System.out.println(tmc.getUserById(10));
-//        tmc.saveUser("Anna","Nowak", "an@an.pl", "an");
-//        tmc.printContent(tmc.getAllUsers());
-        System.out.println("Zmieniono hasło: " + tmc.updateUserPasswordById(1,"xxx"));
+        tmc.saveUser("Aleksandra","Mowa", "am@am.pl", "am");
+        tmc.printContent(tmc.getAllUsers());
+        System.out.println("Zmieniono hasło: " + tmc.updateUserPasswordById(1,"yy"));
         System.out.println("Zmieniono hasło: " + tmc.updateUserPasswordById(10,"xxx"));
         mySQLDBConnector.closeConnection(connection);
 
