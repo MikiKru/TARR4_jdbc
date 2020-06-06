@@ -11,7 +11,10 @@ public class Main {
         Connection connection = mySQLDBConnector.setConnection();
 
         TaskManagerController tmc = new TaskManagerController(connection);
-        System.out.println(tmc.getAllUsers());
+        tmc.printContent(tmc.getAllUsers());
+        tmc.printContent(tmc.getAllRoles());
+        System.out.println(tmc.getUserById(1));
+        System.out.println(tmc.getUserById(10));
 
         mySQLDBConnector.closeConnection(connection);
 
