@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import model.Role;
 import model.User;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -229,6 +233,17 @@ public class TaskManagerController {
         } else {
             connection.commit();
         }
+    }
+    public List<User> importFromFile(String path) throws IOException {
+        List<User> users = new ArrayList<>();
+        Scanner scanner = new Scanner(new File(path));
+        scanner.nextLine();         // przesunięcie wskaźnika na dane -> pomijając nagłówek
+        while (scanner.hasNextLine()){
+            String line [] = scanner.nextLine().split("; ");
+            users.add(new User(line[0], line[1], line[2], line[3]));
+        }
+        scanner.close();
+        return users;
     }
 
 }

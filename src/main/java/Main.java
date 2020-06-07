@@ -2,13 +2,15 @@ import config.MySQLDBConnector;
 import controller.TaskManagerController;
 import model.User;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
         MySQLDBConnector mySQLDBConnector = new MySQLDBConnector();
         mySQLDBConnector.javaConnectorTest();
         Connection connection = mySQLDBConnector.setConnection();
@@ -38,6 +40,8 @@ public class Main {
                         new User("Y1","Y1","y1@y.pl","yy"),
                         new User("Z","Z","z@z.pl","zz")
                         )));
+        List<User> users = tmc.importFromFile("C:\\Users\\PROXIMO\\Desktop\\TARR4\\jdbc\\src\\main\\resources\\file\\data.csv");
+        tmc.addUsersWithTransactions(users);
         mySQLDBConnector.closeConnection(connection);
 
     }
