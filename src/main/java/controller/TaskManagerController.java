@@ -174,14 +174,15 @@ public class TaskManagerController {
         ps.setString(2, password);
         if(ps.executeQuery().next()){
             System.out.println("Poprawnie zalogowano użytkownika: " + email);
+            loginCount = 3;
         } else {
             loginCount --;
             if(loginCount < 0){
                 System.out.println("konta zablokowane");
                 PreparedStatement ps1 = connection.prepareStatement(
                         "UPDATE tm_user SET user_status = 0 WHERE user_email = ?");
-                ps.setString(1, email);
-                ps.executeUpdate();
+                ps1.setString(1, email);
+                ps1.executeUpdate();
             } else {
                 System.out.println("Błąd logowania");
             }

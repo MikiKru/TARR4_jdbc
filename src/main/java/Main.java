@@ -23,6 +23,10 @@ public class Main {
         tmc.addRoleByRoleNameToUser("admin",1);
         tmc.getAllUsersWithRoles();
         tmc.loginUser("mk@mk.pl", "00");
+        tmc.loginUser("mk@mk.pl", "111");
+        tmc.loginUser("mk@mk.pl", "234");
+        tmc.loginUser("mk@mk.pl", "012");
+        tmc.loginUser("mk@mk.pl", "yy");
         mySQLDBConnector.closeConnection(connection);
 
     }
