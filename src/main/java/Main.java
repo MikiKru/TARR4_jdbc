@@ -1,8 +1,11 @@
 import config.MySQLDBConnector;
 import controller.TaskManagerController;
+import model.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -29,6 +32,12 @@ public class Main {
         tmc.loginUser("mk@mk.pl", "yy");
         tmc.getAggregatedRoles();
 //        tmc.addUserWithTransactions("Anna", "Pies", "ap@ap.pl", "ap");
+        tmc.addUsersWithTransactions(
+                new ArrayList<>(Arrays.asList(
+                        new User("X1","X1","x1@x.pl","xx"),
+                        new User("Y1","Y1","y1@y.pl","yy"),
+                        new User("Z","Z","z@z.pl","zz")
+                        )));
         mySQLDBConnector.closeConnection(connection);
 
     }

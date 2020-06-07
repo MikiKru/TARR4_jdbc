@@ -220,7 +220,7 @@ public class TaskManagerController {
                         try {
                             saveUser(user.getUserName(), user.getUserLastName(),user.getUserEmail(), user.getUserPassword());
                         } catch (SQLException e) {
-                            e.printStackTrace();
+                            System.out.println("Błąd!!!");
                             isError.set(true);
                         }
                     });
