@@ -10,7 +10,7 @@ public class Main {
         mySQLDBConnector.javaConnectorTest();
         Connection connection = mySQLDBConnector.setConnection();
 
-        TaskManagerController tmc = new TaskManagerController(connection);
+        TaskManagerController tmc = new TaskManagerController(connection, 3);
         tmc.printContent(tmc.getAllUsers());
         tmc.printContent(tmc.getAllRoles());
         System.out.println(tmc.getUserById(1));
@@ -22,7 +22,7 @@ public class Main {
         tmc.deleteUserByIdRecursively(3);
         tmc.addRoleByRoleNameToUser("admin",1);
         tmc.getAllUsersWithRoles();
-        tmc.loginUser("mk@mk.pl", "yy");
+        tmc.loginUser("mk@mk.pl", "00");
         mySQLDBConnector.closeConnection(connection);
 
     }

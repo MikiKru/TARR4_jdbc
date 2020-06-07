@@ -162,6 +162,7 @@ public class TaskManagerController {
             ps.executeUpdate();
         }
     }
+    private int loginCount = 3;
     // 1. metoda do logowania użytkownika -> email + password + status = true
     // 2. gdy 3 razy pod rząd błędnie się zaloguje to status = false
     public void loginUser(String email, String password) throws SQLException {
@@ -172,9 +173,18 @@ public class TaskManagerController {
         ps.setString(1, email);
         ps.setString(2, password);
         if(ps.executeQuery().next()){
-            System.out.printf("Poprawnie zalogowano użytkownika: " + email);
+            System.out.println("Poprawnie zalogowano użytkownika: " + email);
         } else {
-            System.out.println("Błąd logowania");
+            loginCount --;
+            if(loginCount < 0){
+                System.out.println("konta zablokowane");
+                PreparedStatement ps1 = connection.prepareStatement(
+                        "UPDATE tm_user SET user_status = 0 WHERE user_email = ?");
+                ps.setString(1, email);
+                ps.executeUpdate();
+            } else {
+                System.out.println("Błąd logowania");
+            }
         }
 
 
