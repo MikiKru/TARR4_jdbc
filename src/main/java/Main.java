@@ -28,6 +28,7 @@ public class Main {
         tmc.loginUser("mk@mk.pl", "012");
         tmc.loginUser("mk@mk.pl", "yy");
         tmc.getAggregatedRoles();
+//        tmc.addUserWithTransactions("Anna", "Pies", "ap@ap.pl", "ap");
         mySQLDBConnector.closeConnection(connection);
 
     }

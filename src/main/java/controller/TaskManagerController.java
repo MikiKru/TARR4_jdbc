@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import model.Role;
 import model.User;
 
+import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @AllArgsConstructor
 public class TaskManagerController {
@@ -195,6 +197,19 @@ public class TaskManagerController {
         while (resultSet.next()){
             System.out.printf("| %15s | %3d |\n", resultSet.getString(1), resultSet.getInt(2));
         }
+    }
+    public void addUserWithTransactions(String name, String lastName, String email, String password) throws SQLException {
+        // ustawienie transakcji
+        connection.setAutoCommit(false);
+        saveUser(name, lastName, email, password);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Czy na pewno chcesz dodać nowego użytkownika? (T/N)");
+        if(scanner.nextLine().equals("T")){
+            connection.commit();        // zatwoerdzenie zmian do bazy danych
+        } else {
+            connection.rollback();      // odrzucenie zmian do bazy danych
+        }
+
     }
 
 }
