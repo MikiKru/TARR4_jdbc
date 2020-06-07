@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import model.Role;
 import model.User;
 
-import javax.swing.*;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @AllArgsConstructor
 public class TaskManagerController {
@@ -214,12 +214,20 @@ public class TaskManagerController {
     // dotychczas wprowadzone rekrdy są wycofywane
     public void addUsersWithTransactions(List<User> users) throws SQLException {
         connection.setAutoCommit(false);
-        try {
-            // ???
-            connection.commit();
-        } catch (Exception e){
-            System.out.println("Wystąpił błąd");
+        AtomicBoolean isError = new AtomicBoolean(false);
+        users.stream().forEach(user ->
+                    {
+                        try {
+                            saveUser(user.getUserName(), user.getUserLastName(),user.getUserEmail(), user.getUserPassword());
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            isError.set(true);
+                        }
+                    });
+        if(isError.get()){
             connection.rollback();
+        } else {
+            connection.commit();
         }
     }
 
