@@ -187,10 +187,15 @@ public class TaskManagerController {
                 System.out.println("Błąd logowania");
             }
         }
-
-
     }
-
+    // metoda zwracająca role wraz z ich  częśtością wystepowania
+    public void getAggregatedRoles() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM roles_agg");
+        while (resultSet.next()){
+            System.out.printf("| %15s | %3d |\n", resultSet.getString(1), resultSet.getInt(2));
+        }
+    }
 
 }
 
