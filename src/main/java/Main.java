@@ -21,6 +21,7 @@ public class Main {
         System.out.println("Zmieniono hasło: " + tmc.updateUserPasswordById(10,"xxx"));
         tmc.deleteUserByIdRecursively(3);
         tmc.getAllUsersWithRoles();
+        tmc.addRoleByRoleNameToUser("admin",2);
         mySQLDBConnector.closeConnection(connection);
 
     }

@@ -130,6 +130,38 @@ public class TaskManagerController {
                     );
         }
     }
+    public boolean userRoleCheck(String roleName, int userId) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "select * from user_role where " +
+                        "role_id = (select role_id from tm_role where role_name = ?) and user_id = ?;"
+        );
+        ps.setString(1, roleName);
+        ps.setInt(2, userId);
+        ResultSet resultSet = ps.executeQuery();
+        return resultSet.next();
+    }
+    // metoda przypisjąca uprewnienie do użytkownika
+    public void addRoleByRoleNameToUser(String roleName, int userId) throws SQLException {
+        if(userRoleCheck(roleName, userId)) {
+            PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO user_role VALUES (?, (SELECT role_id FROM tm_role WHERE role_name = ?))"
+            );
+            ps.setInt(1, userId);
+            ps.setString(2, roleName);
+            ps.executeUpdate();
+        }
+    }
+    // metoda usuwająca role użytkownika
+    public void deleteRoleByRoleNameToUser(String roleName, int userId) throws SQLException {
+        if(userRoleCheck(roleName, userId)) {
+            PreparedStatement ps = connection.prepareStatement(
+                    "DELETE FROM user_role WHERE user_id = ? AND role_id = (SELECT role_id FROM tm_role WHERE role_name = ?)"
+            );
+            ps.setInt(1, userId);
+            ps.setString(2, roleName);
+            ps.executeUpdate();
+        }
+    }
 }
 
 

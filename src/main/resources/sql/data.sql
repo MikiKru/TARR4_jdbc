@@ -34,10 +34,22 @@ select * from tm_user;
 select * from tm_role;
 select * from user_role;
 
+select last_insert_id();
+
+delete from tm_user where user_id = 1;
+
 # Utworzenie nowego użytkownika na serwerze DB i przypisanie mu uprawnień
 CREATE USER 'tm_user'@'localhost' IDENTIFIED BY 'qwe123';
 GRANT SELECT, INSERT, UPDATE, DELETE ON task_manager.* TO 'tm_user'@'localhost';
 
+# email, registration, status, role_name
+SELECT u.user_email, u.user_registration, u.user_status, r.role_name FROM tm_user u join  user_role ur on (u.user_id = ur.user_id) join tm_role r on (r.role_id = ur.role_id) order by u.user_registration;
+delete from user_role where user_id = 1 and role_id = 1;
+
+
+select * from user_role where role_id = (select role_id from tm_role where role_name = 'admin') and user_id = 1;
+
+insert into user_role values (1, (select role_id from tm_role where role_name = 'admin'))
 
 
 
