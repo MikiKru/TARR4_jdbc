@@ -209,7 +209,18 @@ public class TaskManagerController {
         } else {
             connection.rollback();      // odrzucenie zmian do bazy danych
         }
-
+    }
+    // metoda wprowadzająca wielu użytkowników z listy i wsytuacji gdy wysąpi błąd podczas ich wprowadzania wszystkie
+    // dotychczas wprowadzone rekrdy są wycofywane
+    public void addUsersWithTransactions(List<User> users) throws SQLException {
+        connection.setAutoCommit(false);
+        try {
+            // ???
+            connection.commit();
+        } catch (Exception e){
+            System.out.println("Wystąpił błąd");
+            connection.rollback();
+        }
     }
 
 }
