@@ -142,7 +142,7 @@ public class TaskManagerController {
     }
     // metoda przypisjąca uprewnienie do użytkownika
     public void addRoleByRoleNameToUser(String roleName, int userId) throws SQLException {
-        if(userRoleCheck(roleName, userId)) {
+        if(!userRoleCheck(roleName, userId)) {
             PreparedStatement ps = connection.prepareStatement(
                     "INSERT INTO user_role VALUES (?, (SELECT role_id FROM tm_role WHERE role_name = ?))"
             );
@@ -153,7 +153,7 @@ public class TaskManagerController {
     }
     // metoda usuwająca role użytkownika
     public void deleteRoleByRoleNameToUser(String roleName, int userId) throws SQLException {
-        if(userRoleCheck(roleName, userId)) {
+        if(!userRoleCheck(roleName, userId)) {
             PreparedStatement ps = connection.prepareStatement(
                     "DELETE FROM user_role WHERE user_id = ? AND role_id = (SELECT role_id FROM tm_role WHERE role_name = ?)"
             );
