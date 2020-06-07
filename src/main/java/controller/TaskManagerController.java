@@ -162,6 +162,25 @@ public class TaskManagerController {
             ps.executeUpdate();
         }
     }
+    // 1. metoda do logowania użytkownika -> email + password + status = true
+    // 2. gdy 3 razy pod rząd błędnie się zaloguje to status = false
+    public void loginUser(String email, String password) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement(
+                "SELECT * FROM task_manager.tm_user " +
+                        "WHERE user_email=? AND user_password=? and user_status=1;"
+        );
+        ps.setString(1, email);
+        ps.setString(2, password);
+        if(ps.executeQuery().next()){
+            System.out.printf("Poprawnie zalogowano użytkownika: " + email);
+        } else {
+            System.out.println("Błąd logowania");
+        }
+
+
+    }
+
+
 }
 
 

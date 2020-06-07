@@ -22,6 +22,7 @@ public class Main {
         tmc.deleteUserByIdRecursively(3);
         tmc.addRoleByRoleNameToUser("admin",1);
         tmc.getAllUsersWithRoles();
+        tmc.loginUser("mk@mk.pl", "yy");
         mySQLDBConnector.closeConnection(connection);
 
     }
